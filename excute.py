@@ -49,19 +49,21 @@ class myclass(object):
 
         DF_1=DF.squeeze()
         #writing the input data        
-        data=pd.read_csv('Activity_2.csv')
+        act_data=pd.read_csv('Activity_2.csv')
         
-        data=data.append(DF_1)
+        act_data=act_data.append(DF_1)
 
         if main_F  not in('no' or 'n'):
             if main_F in ('no' or 'nothing' or 'n'):
-                data.loc[data.index[-1],'Main_Focus']= 'None'
+               act_data.loc[act_data.index[-1],'Main_Focus']= 'None'
             
-            else: data.loc[data.index[-1],'Main_Focus']= main_F
+            else: act_data.loc[act_data.index[-1],'Main_Focus']= main_F
 
-        data.to_csv('Activity_2.csv', index=False)
+        act_data.to_csv('Activity_2.csv', index=False)
+    
+        activity_name=data.get('act')
 
-
+        print(f'\n Activity Start -> { activity_name}' )
         return time_current
         
     def stop(self):
@@ -80,6 +82,8 @@ class myclass(object):
         data.loc[data.index[-1],'Total(H)']= f'{diff:.2f}'
         data.loc[data.index[-1],'Days']= counter_day
         data.to_csv('Activity_2.csv',index=False)
+
+        print('Stop activity...')
 
         
 
@@ -161,7 +165,7 @@ class myclass(object):
 
 obj=myclass()
 
-obj.awake_status()
+
 
 
 
@@ -176,4 +180,3 @@ obj.awake_status()
 # git push <remote>  master
 
 
-git 
