@@ -161,7 +161,7 @@ class myclass(object):
 # obj=myclass()
 
 
-# print(''hhgg)
+print('hi')
 
 
 # git remote -v #checker the fetch and push URL
