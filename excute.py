@@ -161,8 +161,6 @@ class myclass(object):
 # obj=myclass()
 
 
-print('hi')
-
 
 # git remote -v #checker the fetch and push URL
 # git remote add <name> url # adding a new repo
