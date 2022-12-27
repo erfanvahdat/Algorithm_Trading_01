@@ -1,6 +1,7 @@
 import time
 # from datetime import datetime
 import pandas as pd
+
 from datetime import datetime
 import numpy as np
 from csv import DictWriter
@@ -158,7 +159,9 @@ class myclass(object):
         else: print('Please run the Starter. ')
 
 
-# obj=myclass()
+obj=myclass()
+
+obj.awake_status()
 
 
 
@@ -167,7 +170,10 @@ class myclass(object):
 
 # # Commit a file into a repo
 # git add <name_file> 
-# git commit 
+# git commit -m '<comment>' 
 
 # #after comming the last file:
-# git push origin master
+# git push <remote>  master
+
+
+git 
