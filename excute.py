@@ -158,5 +158,8 @@ class myclass(object):
         else: print('Please run the Starter. ')
 
 
-obj=myclass()
+# obj=myclass()
+
+
+print(''hhgg)
 
