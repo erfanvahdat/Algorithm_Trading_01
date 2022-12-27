@@ -158,8 +158,18 @@ class myclass(object):
         else: print('Please run the Starter. ')
 
 
-obj=myclass()
+# obj=myclass()
 
 
 # print(''hhgg)
 
+
+# git remote -v #checker the fetch and push URL
+# git remote add <name> url # adding a new repo
+
+# # Commit a file into a repo
+# git add <name_file> 
+# git commit 
+
+# #after comming the last file:
+# git push origin master
