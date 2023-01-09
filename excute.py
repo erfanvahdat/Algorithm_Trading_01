@@ -135,6 +135,7 @@ class myclass(object):
         awake_1=pd.read_csv('Awaking.csv')
         awake_1=awake_1.append(df_1)
         awake_1.to_csv('Awaking.csv',index=False)
+        print('awake_start')
     
     def awake_off(self):
         awake_1=pd.read_csv('Awaking.csv')
@@ -163,7 +164,8 @@ class myclass(object):
         else: print('Please run the Starter. ')
 
 
-# obj=myclass()
+obj=myclass()
+
 
 
 
