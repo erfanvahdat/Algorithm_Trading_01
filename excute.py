@@ -16,7 +16,7 @@ elements_1=['Activity','End','Start','Total(m)']
 
 activity_list={'act_1':['erfan']}
 
-class myclass(object):    
+class myclass():    
     
     global DF
     global first_time_day 
@@ -30,45 +30,47 @@ class myclass(object):
         return time
 
 
-    def start(self,assumpt,**data):
+    def start(self):
         global start_current
-        main_F=input('Is there any main focus for today? ')
+        
+        block_time=input('Type Block of Activity?').capitalize()
+        activity=input('Activity name...  ').capitalize()
+        Assumption_timer=int(input('Estimate the time of the Activity  '))
+
+        Block_time=['Thinking','Coding','Reading','Toefl','Think','Code','Read','English']
+
+
         time_current=datetime.now()
         start_current=time_current.strftime('%Y/%m/%d %H:%M')
 
         # =['Day_name','Activity','Start','Days','Assumption_take','Total(m)']
-        DF=pd.DataFrame(columns=['Activity'])
-        DF=DF.append(pd.Series(None),ignore_index=True) 
+        DF=pd.DataFrame()
+        # DF=pd.concat([DF,pd.Series(None)], axis=0, ignore_index=True, join='outer')
+        # DF=DF.append(pd.Series(None),ignore_index=True) 
 
-        DF['Day_name']=calendar.day_name[time_current.weekday()] 
-        DF['Assumption_take(H)']=(f'{assumpt}')
-                
-        for key,value in data.items():
-            DF.loc[DF.index[-1],'Activity']=value.capitalize()
-        DF.loc[DF.index[-1],'Start']=time_current.strftime('%Y/%m/%d %H:%M')
+        DF.loc[-1,'Day_name']=calendar.day_name[time_current.weekday()] 
+        DF.loc[-1,'Activity']=activity
+        DF.loc[-1,'Start']=time_current.strftime('%Y/%m/%d %H:%M')
+        DF.loc[-1,'Assumption_take(H)']=(f'{Assumption_timer}')
+        DF.loc[-1,'Block_time']=(f'{block_time}')
 
-        DF_1=DF.squeeze()
-        #writing the input data        
-        act_data=pd.read_csv('Activity_2.csv')
-        
-        act_data=act_data.append(DF_1)
+        # DF.loc[DF.index[-1],'Day_name']=calendar.day_name[time_current.weekday()] 
+        # DF.loc[DF.index[-1],'Activity']=activity
+        # DF.loc[DF.index[-1],'Start']=time_current.strftime('%Y/%m/%d %H:%M')
+        # DF.loc[DF.index[-1],'Assumption_take(H)']=(f'{Assumption_timer}')
+        # DF.loc[DF.index[-1],'Block_time']=(f'{block_time}')
 
-        if main_F  not in('no' or 'n'):
-            if main_F in ('no' or 'nothing' or 'n'):
-               act_data.loc[act_data.index[-1],'Main_Focus']= 'None'
-            
-            else: act_data.loc[act_data.index[-1],'Main_Focus']= main_F
-
-        act_data.to_csv('Activity_2.csv', index=False)
     
-        activity_name=data.get('act')
+        DF_1=DF.squeeze()
+        # Writing the input data        
+        act_data=pd.read_csv('Task.csv')
 
-        print(f'\n Activity Start -> { activity_name}' )
-        return time_current
+        result = pd.concat([act_data,DF], axis=0, ignore_index=True, join='outer')
+        result.to_csv('Task.csv', index=False)  
         
     def stop(self):
         global DF
-        data=pd.read_csv('Activity_2.csv')
+        data=pd.read_csv('Task.csv')
         end_time=datetime.strptime(datetime.now().strftime('%Y/%m/%d %H:%M'),
                                                     '%Y/%m/%d %H:%M') #when we turn string datetime format to datetime, the year shift to right in printing.
 
@@ -81,53 +83,18 @@ class myclass(object):
         
         data.loc[data.index[-1],'Total(H)']= f'{diff:.2f}'
         data.loc[data.index[-1],'Days']= counter_day
-        data.to_csv('Activity_2.csv',index=False)
+        data.to_csv('Task.csv',index=False)
 
-        print('Stop activity...')
+        print('Stop activity...') 
 
-        
-
-    def main_focus(self):
-        act_am=[]
-        act_pm=[]
-        
-        while True:     
-            checker=input('AM or PM').lower()
-            act_name=input('Well write the activity:').lower()
-
-            # AM Activities
-            if checker in ('am'):
-                act_am.append(act_name)
-
-            # PM Activities
-            elif checker in ('pm'):
-                act_pm.append(act_name)
-            
-            ender=input('Any more for today?').lower()
-
-            if ender in  ( 'y' ,'yes' ):
-                pass
-            
-            else: break
-
-        # var3 = " -- ".join(a)
-        data=pd.read_csv('Activity_2.csv')
-
-        # check if some list is not empty -> raise Error after excution if any of the list was empty.
-        if act_am:
-            data.loc[data.index[-1],'focus_am']= ' -- '.join(act_am)
-        if act_pm:
-            data.loc[data.index[-1],'focus_pm']= ' -- '.join(act_pm)
-        
-        data.to_csv('Activity_2.csv',index=False )
-    
+         
     def awake(self):
         get_time=datetime.today()
-        
         weekend=get_time.strftime('%A')
 
         df_1=pd.DataFrame({'Weekend':weekend,
                             'Awake_time':get_time.strftime('%H:%M'),
+        
                             'Status':'Start'},index=[0])
     # a[0].values[0][1]
         df_1=df_1.squeeze()
@@ -163,12 +130,7 @@ class myclass(object):
             print('awake_time has been Started! ')
         else: print('Please run the Starter. ')
 
-
 obj=myclass()
-
-
-
-
 
 
 # git remote -v #checker the fetch and push URL
