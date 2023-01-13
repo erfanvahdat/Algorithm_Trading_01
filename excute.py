@@ -20,6 +20,7 @@ class myclass():
     
     global DF
     global first_time_day 
+    
     first_time_day=datetime.strptime('2022/12/08 16:15','%Y/%m/%d %H:%M')
 
     def __init__(self):
@@ -32,7 +33,8 @@ class myclass():
 
     def start(self):
         global start_current
-        
+
+        print('1.Coding 2.Reading 3.Toefl 4. Thinking')    
         block_time=input('Type Block of Activity?').capitalize()
         activity=input('Activity name...  ').capitalize()
         Assumption_timer=int(input('Estimate the time of the Activity  '))
@@ -133,6 +135,7 @@ class myclass():
 obj=myclass()
 
 
+
 # git remote -v #checker the fetch and push URL
 # git remote add <name> url # adding a new repo
 
@@ -142,5 +145,3 @@ obj=myclass()
 
 # #after comming the last file:
 # git push <remote>  master
-
-
