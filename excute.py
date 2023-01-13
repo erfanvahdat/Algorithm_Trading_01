@@ -138,7 +138,7 @@ obj=myclass()
 
 # git remote -v #checker the fetch and push URL
 # git remote add <name> url # adding a new repo
-
+#hi
 # # Commit a file into a repo
 # git add <name_file> 
 # git commit -m '<comment>' 

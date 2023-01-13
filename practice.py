@@ -22,7 +22,7 @@ class FinancialModel(torch.nn.Module):
         # x = torch.nn.functional.relu(self.fc3(x))
         x = self.fc3(x)
         return x
-#d
+#dd
 import matplotlib.pyplot as plt
 
 class Train_eval():
