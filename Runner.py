@@ -1,7 +1,9 @@
 
 from excute import obj
 
-# obj.start() 
+obj.start() 
 # obj.stop() # 
 
-#f
+# obj.awake()
+# obj.awake_status()
+# obj.awake_off()
