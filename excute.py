@@ -99,10 +99,10 @@ class myclass():
         
                             'Status':'Start'},index=[0])
     # a[0].values[0][1]
-        df_1=df_1.squeeze()
+        # df_1=df_1.squeeze()
     
         awake_1=pd.read_csv('Awaking.csv')
-        awake_1=awake_1.append(df_1)
+        awake_1=pd.concat([awake_1,df_1],axis=0,ignore_index=True)
         awake_1.to_csv('Awaking.csv',index=False)
         print('awake_start')
     
