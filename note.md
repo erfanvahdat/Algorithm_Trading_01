@@ -21,7 +21,7 @@ our featuers is the the signal of macd. trained to understand what and where is 
 
 
 
-helloo
+
 
 
 tihnk as a machine learning engineer and testing and deploying of models and that person want to become a computer scientist, wnat to figure out how computer and all the aspect that has made the computer. that person as a machine learning engineer does not have a heavy background in mathematic but also can deal with models without undersanding fully how they are working..
