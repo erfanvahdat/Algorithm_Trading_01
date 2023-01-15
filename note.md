@@ -20,7 +20,7 @@ our featuers is the the signal of macd. trained to understand what and where is 
 3. 
 
 
-
+hhhh
 
 
 
