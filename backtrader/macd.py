@@ -51,7 +51,7 @@ class MACD():
                     self.label.append(1)
             
 
-        #plot
+        
         plt.figure(figsize=(10, 4)) 
         ax1 = plt.subplot(3, 1, 1)
         plt.plot(self.data.Date, self.data.Close)
