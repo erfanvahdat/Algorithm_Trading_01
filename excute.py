@@ -40,7 +40,29 @@ class myclass():
         Assumption_timer=int(input('Estimate the time of the Activity  '))
 
         Block_time=['Thinking','Coding','Reading','Toefl','Think','Code','Read','English']
+        # Time block
+        Block_time_thinking=['Thinking','think','Though',]
+        # reading blokc
+        Block_time_reading=['Reading','Read']
+        # Codign block
+        Block_time_code=['Coding','Code']
+        # Toefl block
+        Block_time_toefl=['English','Toefl']
 
+
+        
+        if block_time in Block_time_code:
+            block_time= 'Coding'
+        elif block_time in Block_time_reading:
+            block_time= 'Reading'
+        elif block_time in Block_time_toefl:
+            block_time= 'Toefl'            
+        elif block_time in Block_time_thinking:
+            block_time= 'Thinking'
+
+        else: print('Try Again, Block time is invalid')
+
+        
 
         time_current=datetime.now()
         start_current=time_current.strftime('%Y/%m/%d %H:%M')
@@ -56,13 +78,7 @@ class myclass():
         DF.loc[-1,'Assumption_take(H)']=(f'{Assumption_timer}')
         DF.loc[-1,'Block_time']=(f'{block_time}')
 
-        # DF.loc[DF.index[-1],'Day_name']=calendar.day_name[time_current.weekday()] 
-        # DF.loc[DF.index[-1],'Activity']=activity
-        # DF.loc[DF.index[-1],'Start']=time_current.strftime('%Y/%m/%d %H:%M')
-        # DF.loc[DF.index[-1],'Assumption_take(H)']=(f'{Assumption_timer}')
-        # DF.loc[DF.index[-1],'Block_time']=(f'{block_time}')
-
-    
+     
         DF_1=DF.squeeze()
         # Writing the input data        
         act_data=pd.read_csv('Task.csv')

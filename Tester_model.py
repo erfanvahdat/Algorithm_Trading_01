@@ -1,4 +1,3 @@
-
 import torch
 import gym
 import matplotlib.pyplot as plt
@@ -8,11 +7,13 @@ import matplotlib.pyplot as plt
 import seaborn as sn
 from sklearn.model_selection import train_test_split as split
 from torch.utils.data import TensorDataset, DataLoader
+from  tqdm import tqdm, trange, tqdm_notebook
+
 
 
 # Load and preprocess the data
 path=f'cryptoData/'
-df=pd.read_csv(f'{path}ADA-USD.csv',parse_dates=True,index_col='Date')
+df=pd.read_csv(f'{path}BNB-USD.csv',parse_dates=True,index_col='Date')
 data_YY=df['Close'].shift(30)
 data_YY=torch.tensor(data_YY.fillna(data_YY.mean()))
 data_XX=torch.tensor(df.values)
@@ -33,9 +34,9 @@ for i in range(len(data)-window_size):
 data_X = torch.stack(data_X)
 data_y = torch.stack(data_y)
 
+# print(data_X,data_y)
+# Define the model architecture -> 
 
-
-# Define the model architecture
 class FinancialModel(torch.nn.Module):
     def __init__(self, input_size, output_size):
         super(FinancialModel, self).__init__()
@@ -65,26 +66,41 @@ optimizer = torch.optim.Adam(model.parameters())
 loss_fn = torch.nn.MSELoss()
 
 # Define the number of training iterations
-num_iterations = 40
+num_iterations = 5
+
+# print(X_train.shape[1]) # must be 30
 
 for iteration in range(num_iterations):
     Loss=[]
-    for X_batch, y_batch in train_loader:
+    loss= 0 
+    for X_batch, y_batch in tqdm_notebook((train_loader)):
+
         optimizer.zero_grad()
         output = model(X_batch.squeeze().float())
-    
-        # print(output.squeeze().shape)
-        # print(y_batch.abssqueeze().shape)
-        plt.ion()
+
+        # plt.ion()
         loss = loss_fn(output.squeeze().float(), y_batch.squeeze().float())
         Loss.append(loss)
         loss.backward()
         optimizer.step()
-        with torch.no_grad():
-            plt.clf() # clear the plot
-            plt.plot(np.arange(len(Loss)), Loss,c='red')
-            plt.show()
-            plt.pause(0.001) # pause for a short time
+        # loss += loss
+    
+    with torch.no_grad():
+        if iteration %2 ==0:
+            print('loss ->',loss.item())   
+            
+
+        # with torch.no_grad():
+        #     plt.clf() # clear the plot
+        #     plt.plot(np.arange(len(Loss)), Loss,c='red')
+        #     plt.show()
+        #     plt.pause(0.001) # pause for a short time
+
+    
+
+
+
+
 
 
 
