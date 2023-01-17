@@ -27,4 +27,5 @@ class Candle():
         
         return self.data
 
+# Excute
 ca=Candle()

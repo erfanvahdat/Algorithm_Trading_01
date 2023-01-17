@@ -67,5 +67,6 @@ class MACD():
 
         return self.X_list,np.array(self.label)
                 
-# Excute
+
+# EXcuteS
 macd=MACD()

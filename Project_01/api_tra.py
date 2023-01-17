@@ -51,5 +51,6 @@ class YF():
         return data
             
 
-obj=YF()
+# EXcute
+yf=YF()
 
