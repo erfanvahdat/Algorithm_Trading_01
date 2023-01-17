@@ -10,7 +10,7 @@ import torch
 class MACD():
     def __init__(self):
         super(MACD, self).__init__()
-        self.data=pd.read_csv('btc_2021.csv') # Data
+        self.data=pd.read_csv('BTC-USD.csv') # Data
         self.X_list=[]
         self.label=[]
 
@@ -18,7 +18,7 @@ class MACD():
         # Calculate MACD values using the pandas_ta library
         
 
-        df=pd.read_csv('btc_2021.csv')
+        df=pd.read_csv('BTC-USD.csv')
         df=self.data.ta.macd(close='close', fast=12, slow=26, signal=9, append=True)
         
         # Create empty columns for buy and sell signals
@@ -52,21 +52,20 @@ class MACD():
             
 
         
-        plt.figure(figsize=(10, 4)) 
-        ax1 = plt.subplot(3, 1, 1)
-        plt.plot(self.data.Date, self.data.Close)
-        ax1.set_title('Close Price')
+        # plt.figure(figsize=(10, 4)) 
+        # ax1 = plt.subplot(3, 1, 1)
+        # plt.plot(self.data.Date, self.data.Close)
+        # ax1.set_title('Close Price')
 
-        ax2 = plt.subplot(3, 1, 2)
-        plt.plot(self.data.Date, self.data['MACD_12_26_9'], c='black')
-        plt.plot(self.data.Date, self.data['MACDs_12_26_9'], c='red')
-        plt.scatter(np.arange(len(self.data)),self.data.Buy,marker='^',c='green')
-        plt.scatter(np.arange(len(self.data)),self.data.Sell,marker='v',c='red')
-        ax2.set_title('MACD and Signal')
-        plt.show()
+        # ax2 = plt.subplot(3, 1, 2)
+        # plt.plot(self.data.Date, self.data['MACD_12_26_9'], c='black')
+        # plt.plot(self.data.Date, self.data['MACDs_12_26_9'], c='red')
+        # plt.scatter(np.arange(len(self.data)),self.data.Buy,marker='^',c='green')
+        # plt.scatter(np.arange(len(self.data)),self.data.Sell,marker='v',c='red')
+        # ax2.set_title('MACD and Signal')
+        # plt.show()
 
         return self.X_list,np.array(self.label)
                 
 # Excute
-obj=MACD()
-X_list,label=obj.signal_macd()
+macd=MACD()
