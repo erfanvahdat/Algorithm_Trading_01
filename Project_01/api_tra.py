@@ -50,7 +50,5 @@ class YF():
     
         return data
             
-
-# Excute
+# Excuted
 yf=YF()
-
