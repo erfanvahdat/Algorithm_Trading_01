@@ -91,4 +91,5 @@ cross_loss=nn.CrossEntropyLoss()
 # # print(f'\nfirst model\n',model.state_dict())
 
 
+# Runner
 print(len(X),len(y))
