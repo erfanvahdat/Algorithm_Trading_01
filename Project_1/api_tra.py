@@ -4,9 +4,6 @@ import numpy as np
 import yfinance as yf
 from tradingview_ta import TA_Handler
 
-tickers = ["BTC-USD", ] # "ETH-USD", "XRP-USD"
-# data = yf.download(tickers, period='max',interval='1d')
-
 class YF():
     def __init__(self):
         pass
@@ -51,4 +48,8 @@ class YF():
         return data
             
 # Excuted
-yf=YF()
+yfin=YF()
+
+
+
+
