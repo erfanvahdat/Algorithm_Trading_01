@@ -23,8 +23,7 @@ class Candle():
         self.data=candlestick.hammer(self.data,ohlc,target='hammer')
         self.data=candlestick.gravestone_doji(self.data,ohlc,target='gravestone_doji')
         self.data=candlestick.dragonfly_doji(self.data,ohlc,target='dragonfly_doji')
-        self.data=candlestick.morning_star_doji(self.data,ohlc,target='morningstar')
-        
+        self.data=candlestick.morning_star_doji(self.data,ohlc,target='morningstar')        
         return self.data
 
 # Excute_1
