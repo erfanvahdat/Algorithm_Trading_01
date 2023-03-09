@@ -11,6 +11,7 @@ from PIL import Image
 
 
 
+
 """
     os.lisdr(parh) # full element in the dictionalry
     or ->  [f for f in os.listdir(path) if f.endswith('.png')]
@@ -36,13 +37,13 @@ def Image_opt():
     for index,file in enumerate(os.listdir(path)):
         if file.endswith('.png') or file.endswith('.jpg'):
             open_image=Image.open(os.path.join(path,file))
-            
+            print(open_image)
+
             # Tensor_image resiezed
-            tensor_image_resized=transform(open_image)
+#             tensor_image_resized=transform(open_image)
             # Turn the Tensor to Image
-            tensor_rgba = transforms.ToPILImage(mode='RGBA')(tensor_image_resized)
+#             tensor_rgba = transforms.ToPILImage(mode='RGBA')(tensor_image_resized)
 
-            tensor_rgba.save(os.path.join(path, file))
-
+#             tensor_rgba.save(os.path.join(path, file))
 
 Image_opt()
