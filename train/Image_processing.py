@@ -6,6 +6,8 @@ import sys
 import os
 import shutil
 from distutils.dir_util import copy_tree
+from torch.utils.data import Dataset, TensorDataset
+
 import torchvision.transforms as transforms
 from PIL import Image
 
@@ -24,20 +26,30 @@ from PIL import Image
     copy_tree(path,new_path )
     """
 
+
+
 def Image_opt():
     # copy_path="C:/Users/Erfan/Desktop/Symetric triangle/copy"
     # path="C:/Users/Erfan/Desktop/Symetric triangle/"
-    path="/Algorithm_Trading_01/DATA/Rising_Wedge//"
+    # path="A:\Algorithm_Trading_01\DATA\copy_Train\Rising_Wedge/"
+    # path="A:\Algorithm_Trading_01\DATA\Train\Rising_Wedge/"
+    path="A:\Algorithm_Trading_01\DATA\Train\Symetric_triangle"
     # Copy the original file
     # copy_tree(path,copy_path)
     transform = transforms.Compose([transforms.Resize((500,900)),  # Resize image
             transforms.ToTensor()  # Convert image to PyTorch tensor 
                     ])
     
+
     for index,file in enumerate(os.listdir(path)):
-        if file.endswith('.png') or file.endswith('.jpg'):
-            open_image=Image.open(os.path.join(path,file))
-            print(open_image)
+        # if file.endswith('.png') or file.endswith('.jpg'):
+            # open_image=Image.open(os.path.join(path,file))
+
+        os.rename(os.path.join(path,file),os.path.join(path,f"Symetric_triangle_{index}.png"))
+    
+        # if index== 1:        
+            # return shutil.move(os.path.join(path,file),'C:/Users/Erfan/Desktop/')
+        
 
             # Tensor_image resiezed
 #             tensor_image_resized=transform(open_image)
@@ -47,3 +59,6 @@ def Image_opt():
 #             tensor_rgba.save(os.path.join(path, file))
 
 Image_opt()
+
+
+
