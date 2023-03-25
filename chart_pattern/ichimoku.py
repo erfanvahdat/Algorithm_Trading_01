@@ -154,6 +154,7 @@ font = {'family' : 'normal',
 # plt.grid(False)
 # plt.show()
 #########################funcirton of chart plotting######################################
+#########################funcirton of chart plotting######################################
 
 
 
