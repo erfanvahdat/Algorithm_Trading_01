@@ -158,10 +158,14 @@ font = {'family' : 'normal',
 
 
 
-def plt_candle(path_data,ich=None,full=None,figsize=None,ax=None):
+def plt_candle(path_data=None,ich=None,full=None,figsize=None,ax=None,period=None,data=None):
 
-    data=pd.read_csv(path_data,index_col=0,parse_dates=True)
-    print('Data is loaded')
+    if path_data == True:
+        data=pd.read_csv(path_data,index_col=0,parse_dates=True)
+        print('Data is loaded')
+    else:
+        data=data
+        
     # Ichimoku-> chikou and kijen_sen -> 26 period
     period26_high = data.High.rolling(window=26).max()
     period26_low = data.Low.rolling(window=26).min()
@@ -172,7 +176,7 @@ def plt_candle(path_data,ich=None,full=None,figsize=None,ax=None):
     period9_low = data.Low.rolling(window=9).min()
     tenkan_sen = ((period9_high + period9_low) / 2).rename('tenkan_sen')
 
-    chikou_span = data.Close.shift(-25).rename('chikou_span')
+    chikou_span = data.Close.shift(- period).rename('chikou_span')
     global df
     df=pd.concat([data,chikou_span,kijun_sen,tenkan_sen],axis=1,join='inner')
 
@@ -196,9 +200,9 @@ def plt_candle(path_data,ich=None,full=None,figsize=None,ax=None):
         ax.vlines(date[inc],open[inc],close[inc],color='green',linewidth=bar_width)
         ax.vlines(date[dec],open[dec],close[dec],color='red',linewidth=bar_width)
 
-        ax.plot(df.chikou_span,c='g', linewidth=1)
-        ax.plot(df.kijun_sen,c='red',linewidth=1)
-        ax.plot(df.tenkan_sen,c='blue',linewidth=1)
+        # ax.plot(df.chikou_span,c='g', linewidth=1)
+        # ax.plot(df.kijun_sen,c='red',linewidth=1)
+        # ax.plot(df.tenkan_sen,c='blue',linewidth=1)
 
         # Adding zoompan in plotting
         zp = ZoomPan()
@@ -226,7 +230,7 @@ def add_plot(ax=None):
     ax.plot(df.Close,c='k')
 
 
-def cal_ich(data_path):
+def cal_ich(data_path,period=None):
     data=pd.read_csv(data_path,index_col=0,parse_dates=True)
     # 9 period
     period9_high = data.High.rolling( window=9).max()
@@ -237,13 +241,84 @@ def cal_ich(data_path):
     period26_low = data.Low.rolling(window=26).min()
     kijun_sen = pd.Series((period26_high + period26_low) / 2).rename('kijun_sen')
     
-    chikou_span = data.Close.shift(-25).rename('chikou_span')
+    chikou_span = data.Close.shift(- period).rename('chikou_span')
     df=pd.concat([data,chikou_span,kijun_sen, tenkan_sen],axis=1,join='inner')
 
     return df
 
 
+
+
 #####################################################################
+
+
 
     
 
+
+
+
+
+# # 
+# fig=plt.figure(figsize=(20,10))
+# ax=fig.add_subplot(1,1,1)
+
+
+# ################################# plotting  the swing in chikou_span ####################################
+
+# from ichimoku import  plt_candle,cal_ich
+
+# plt_candle('./ETH-USD.csv',ax=ax,ich=True)
+
+# # chikou=cal_ich('./ETH-USD.csv',)
+# # ax.plot(chikou['chikou_span'],c='green')
+
+# ax.scatter(high_swing_date,np.array(high_swing) +100 ,marker='v',color='gold')
+# ax.scatter(low_swing_date,np.array(low_swing) -50,marker='^',color='gold')
+
+
+# ############################## Finding the cross over ##############################
+# ich_time=np.array(ich_value.index)
+# cross_below=[]
+# cross_below_time=[]
+
+# cross_high=[]
+# cross_high_time=[]
+
+# stauts_t=False
+# status_k=False
+# for i,(t,k) in  enumerate(zip(ich_value['tenkan_sen'],ich_value['kijun_sen'])):
+#     if t > k and  stauts_t==False:
+#         cross_below.append(t)
+#         cross_below_time.append(ich_time[i])
+#         stauts_t=True
+
+#     elif t < k : # kijun_sen cross the t in top
+#         stauts_t=False
+    
+
+#     if k >t  and  status_k==False: # we have Cross in bottom
+#         cross_high.append(k)
+#         cross_high_time.append(ich_time[i])
+#         status_k=True
+
+#     elif t > k : # tenkan_sen cross the k in bottom
+#         status_k=False
+
+
+
+
+
+# # plot the k and t lines
+# plt.plot(ich_value['kijun_sen'],c='red',label='kijun_sen')
+# plt.plot(ich_value['tenkan_sen'],c='blue',label='tenkan')
+# # plotting the corss of k and 
+# plt.scatter(cross_high_time,np.array(cross_high) +100 ,marker='v',c='red',label='cross_t')
+# plt.scatter(cross_below_time,np.array(cross_below) -100 ,marker='^',c='blue',label='cross_t')
+# # Add the splitted Data
+# for i in save_dates:
+#     ax.axvline(x=i)
+
+# plt.legend(loc="upper left")
+# plt.xticks(rotation=45)
+# plt.show()
