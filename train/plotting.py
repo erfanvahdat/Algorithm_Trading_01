@@ -75,5 +75,8 @@ def plot_result(data,result):
     # plt.savefig('plotting.jpeg')
     plt.plot()
     
-plot_result(data=data,result=result)
-()
+# plot_result(data=data,result=result)
+
+
+
+

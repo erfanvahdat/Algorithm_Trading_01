@@ -1,14 +1,14 @@
-import torch 
+# import torch 
 import numpy as np
 import pandas as pd
-from torch import nn
-import mplfinance as mpl
+# from torch import nn
+# import mplfinance as mpl
 import matplotlib.pyplot as plt
-from  sklearn.preprocessing import Normalizer
+# from  sklearn.preprocessing import Normalizer
 from matplotlib.pyplot import figure, show
-from mpl_interactions import ioff, panhandler, zoom_factory
-from sklearn.linear_model import LinearRegression as LR
-from sklearn.model_selection import train_test_split as split
+# from mpl_interactions import ioff, panhandler, zoom_factory
+# from sklearn.linear_model import LinearRegression as LR
+# from sklearn.model_selection import train_test_split as split
 
 
 # strd_end = np.random.randint(100, 150)
